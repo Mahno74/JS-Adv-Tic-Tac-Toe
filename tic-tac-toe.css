@@ -1,62 +1,73 @@
 ﻿*,
 *::after,
 *::before {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    margin: 0;
+  margin: 0;
 }
 
 :root {
-    --cell-size: 100px;
-    /*Переменная отвечающая за размер ячейки*/
-    --mark-size: cal(var(--cell-size)* 0.9);
-    /*разме*/
+  --cell-size: 100px;
+  /*Переменная отвечающая за размер ячейки*/
+  --mark-size: calc(var(--cell-size) * 0.9);
+  /*разме*/
 }
 
 .board {
-    width: 100vh;
-    height: 100vh;
-    display: grid;
-    grid-template-columns: repeat(3, auto);
-    justify-content: center;
-    justify-items: center;
-    align-items: center;
-    align-content: center;
+  width: 100vh;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  align-content: center;
 }
 
 .cell {
-    width: var(--cell-size);
-    height: var(--cell-size);
-    border: 1px solid black;
+  width: var(--cell-size);
+  height: var(--cell-size);
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
-
 /*Убираем краюнюю границу у ячеек*/
-
 .cell:first-child,
 .cell:nth-child(2),
 .cell:nth-child(3) {
-    border-top: none;
+  border-top: none;
 }
-
-.cell:nth-child(3n+1) {
-    /*каждый тертий потомок 1,4,7*/
-    border-left: none;
+.cell:nth-child(3n + 1) {
+  /*каждый тертий потомок 1,4,7*/
+  border-left: none;
 }
-
-.cell:nth-child(3n+3) {
-    /*каждый третий потомок 3,6,9*/
-    border-right: none;
+.cell:nth-child(3n + 3) {
+  /*каждый третий потомок 3,6,9*/
+  border-right: none;
 }
-
 .cell:nth-child(7),
 .cell:nth-child(8),
 .cell:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
 
-.cell.x {
-    background-color: green;
+/*Настройка Х*/
+.cell.x::before,
+.cell.x::after {
+  content: "";
+  position: absolute;
+  width: calc(var(--mark-size) * 0.15);
+  height: var(--mark-size);
+  background-color: black;
+}
+.cell.x::before {
+  transform: rotate(45deg);
+}
+.cell.x::after {
+  transform: rotate(-45deg);
 }
